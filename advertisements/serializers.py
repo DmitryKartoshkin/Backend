@@ -42,6 +42,6 @@ class AdvertisementSerializer(serializers.ModelSerializer):
         query = self.context["request"]
         if status_count > 10 and query.method == 'POST' and data['status'] == 'OPEN':
             raise ValidationError('Слишком много открытых объявлений')
-        elif status_count > 10 and (query.method == 'PATCH' or query.method == 'PUT'):
+        elif status_count > 10 and (query.method == 'PATCH' or query.method == 'PUT') and data['status'] == 'OPEN':
             raise ValidationError('Слишком много открытых объявлений')
         return data
